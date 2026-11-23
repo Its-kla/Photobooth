@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photobooth ni Kith</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<style>
+  body {
+    background-image: url('Wallpaper for the Nerds.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+</style>
+<body>
+    
+<header>
+  <h1>Snapbooth</h1>
+  <p>Take your shots, pick a frame and a filter, then save or share your strip.</p>
+</header>
+
+<main class="layout">
+  <section class="panel" id="p1">
+    <h2><span class="n">1</span>Take or upload photos</h2>
+    <div class="stage">
+      <video id="video" playsinline muted></video>
+      <div class="empty" id="stageEmpty">The camera is off. Start it, or upload photos from your device.</div>
+      <div class="count" id="count" aria-hidden="true"></div>
+      <div class="flash" id="flash"></div>
+    </div>
+    <div class="row">
+      <button class="primary btn" id="btnCam">Start camera</button>
+      <button id="btnShot" disabled>Take photo</button>
+      <button id="btnAuto" disabled>Auto-shoot all</button>
+      <button id="btnFlip" disabled>Flip camera</button>
+      <label class="btn">Upload photos<input type="file" id="file" accept="image/*" multiple hidden></label>
+      <button id="btnClear">Clear all</button>
+    </div>
+    <div class="slots" id="slots" aria-label="Photo slots"></div>
+    <p class="hint">Tap a slot to retake or replace that shot. Camera access needs https or localhost.</p>
+  </section>
+
+  <aside class="panel preview" id="pv">
+    <canvas id="out" aria-label="Preview of your photobooth creation"></canvas>
+    <div class="row">
+      <button class="btn primary" id="btnSave">Save high-res PNG</button>
+      <button id="btnShare">Share</button>
+    </div>
+    <div class="row social">
+      <a class="btn" id="shFb" target="_blank" rel="noopener">Facebook</a>
+      <a class="btn" id="shTw" target="_blank" rel="noopener">X / Twitter</a>
+      <button id="shIg">Instagram</button>
+    </div>
+    <p class="hint">On a phone, Share sends the image itself to Instagram and other apps. Facebook and X share a link to this page, so host the site first.</p>
+  </aside>
+
+  <section class="panel" id="p2">
+    <h2><span class="n">2</span>Choose a template</h2>
+    <div class="tiles" id="tpls"></div>
+  </section>
+
+  <section class="panel" id="p3">
+    <h2><span class="n">3</span>Pick a filter</h2>
+    <div class="tiles" id="fils"></div>
+  </section>
+
+  <section class="panel" id="p4">
+    <h2><span class="n">4</span>Make it yours</h2>
+    <div class="field"><input type="text" id="cap" maxlength="28" value="SNAPBOOTH" aria-label="Caption"></div>
+    <div class="field"><span>Frame color</span><span id="sws" class="row swatches"></span></div>
+    <div class="field"><label><input type="checkbox" id="showDate" checked> Show today's date</label></div>
+  </section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

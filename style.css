@@ -1,0 +1,63 @@
+:root{--ink:#d31369;--panel:#232857;--panel2:#7ca529;--flash:#ffe14d;--coral:#ff5d73;--paper:#fffdf8;--text:#f3f1ff;--muted:#b8b5d9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--text);font:400 1rem/1.5 Nunito,system-ui,sans-serif}
+header{padding:28px 20px 8px;text-align:center}
+h1{font:400 clamp(2rem,6vw,3.4rem)/1 "Bowlby One",sans-serif;margin:0;color:var(--flash);letter-spacing:.5px}
+header p{margin:8px 0 0;color:var(--muted)}
+h2{font:800 1.15rem/1.2 Nunito,sans-serif;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--flash);color:var(--ink);font-size:.9rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:20px;max-width:1100px;margin:20px auto 60px;padding:0 16px;align-items:start}
+.panel{background:var(--panel);border-radius:18px;padding:18px}
+#p1,#p2,#p3,#p4{grid-column:1}
+.preview{grid-column:2;grid-row:1/span 4;position:sticky;top:16px;text-align:center}
+.preview canvas{width:100%;max-height:70vh;object-fit:contain;background:#0003;border-radius:6px;box-shadow:0 14px 30px #0006;transform:rotate(-1.2deg);margin:6px 0 18px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.preview .row{justify-content:center}
+.swatches{margin:0}
+.btn,button{font:800 .95rem Nunito,sans-serif;border:0;border-radius:999px;padding:10px 18px;background:var(--panel2);color:var(--text);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--flash);color:var(--ink)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.btn:hover:not(:disabled),button:hover:not(:disabled){filter:brightness(1.12)}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.stage{position:relative;aspect-ratio:4/3;background:#434ec5;border-radius:12px;overflow:hidden}
+video{width:100%;height:100%;object-fit:cover;display:none}
+video.on{display:block}
+video.mirror{transform:scaleX(-1)}
+.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted)}
+.count{position:absolute;inset:0;display:none;place-items:center;font:400 8rem "Bowlby One",sans-serif;color:var(--flash);text-shadow:0 4px 20px #000a}
+.count.on{display:grid}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.go{animation:fl .35s ease-out}
+@keyframes fl{from{opacity:.95}to{opacity:0}}
+.slots{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px}
+.slot{flex:0 0 96px;padding:4px;border-radius:10px;background:var(--panel2);border:2px solid transparent;text-align:center;font-size:.8rem}
+.slot img,.slot .ph{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;background:#0b0d24}
+.slot.sel{border-color:var(--flash)}
+.tiles{display:flex;flex-wrap:wrap;gap:10px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px;border-radius:12px;background:var(--panel2);border:2px solid transparent;min-width:96px;font-size:.85rem;color:var(--text)}
+.tile canvas{display:block;border-radius:6px}
+.tile.filter-thumb canvas{width:96px;height:72px}
+.tile[aria-pressed=true]{border-color:var(--flash)}
+.field{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:12px}
+.field input[type=text]{flex:1;min-width:160px;padding:10px 14px;border-radius:999px;border:0;font:700 1rem Nunito;background:var(--ink);color:var(--text)}
+.sw{width:34px;height:34px;border-radius:50%;border:3px solid transparent;padding:0}
+.sw[aria-pressed=true]{border-color:var(--flash)}
+.social{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hint{font-size:.82rem;color:var(--muted);margin:12px 0 0}
+#toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,40px);background:var(--paper);color:var(--ink);padding:10px 18px;border-radius:999px;font-weight:800;opacity:0;transition:.25s;max-width:90vw;text-align:center;z-index:9}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr}
+  #p1{order:1}
+  .preview{order:2;grid-column:1;grid-row:auto;position:static}
+  #p2{order:3}
+  #p3{order:4}
+  #p4{order:5}
+  .preview canvas{max-height:60vh}
+  .count{font-size:5rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .flash.go{animation:none}
+  #toast{transition:none}
+}
